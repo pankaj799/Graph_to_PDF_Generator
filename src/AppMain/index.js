@@ -80,16 +80,33 @@ export default function App() {
           labels: data?.map((row) => row.data_year),
           datasets: [
             {
-              label: "Arrests",
-              data: data?.map((res) => res.Arson),
+              label: "Burglary",
+              data: data?.map((res) => res.Burglary),
               backgroundColor: "transparent",
               borderColor: "rgb(53, 162, 235)",
               pointBackgroundColor: "#1463FF",
-              pointHitRadius: 15,
+              pointHitRadius: 10,
               borderWidth: 2
             }
           ]
-        }
+        },
+        options: {
+          responsive: true,
+          scales: {
+              yAxes: [{
+                      display: true,
+                      ticks: {
+                          beginAtZero: true,
+                          fontSize: 10,
+                          steps: 20,
+                          stepValue: 5,
+                          min: 460,
+                          max: 640,
+                          labelString: 'Arrests',
+                        },
+                      }]
+          },
+      }
       });
       myChart.toDataUrl().then((img) => setImageSrc(img));
     }
@@ -145,7 +162,6 @@ export default function App() {
       margin: 18
     },
     graphContainer: {
-      height: 200,
       backgroundColor: "#F2F4F5",
       borderBottomRightRadius: 8,
       borderBottomLeftRadius: 8,
@@ -153,7 +169,7 @@ export default function App() {
       borderTopLeftRadius: 16
     },
     graphHeader: {
-      height: "25%",
+      height: "15%",
       backgroundColor: "#E8EEFB",
       borderTopRightRadius: 8,
       borderTopLeftRadius: 8,
@@ -272,10 +288,6 @@ export default function App() {
             <View style={styles.graphSubContainer}>
               <Image
                 src={`${imageSrc}`}
-              // styel={{
-              //   width: "80%",
-              //   height: "auto"
-              // }}
               />
             </View>
           </View>
